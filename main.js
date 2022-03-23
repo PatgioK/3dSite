@@ -85,8 +85,25 @@ const moon = new THREE.Mesh(
     normalMap: normalTexture
   })
 )
+// different ways to set
+moon.position.z = 5;
+moon.position.setX(8);
 
 scene.add(moon);
+
+function moveCamera() {
+  // boundingClientRect gets dimension of view port. top shows how far from top of webpage.
+  const t = document.body.getBoundingClientRect().top;
+  moon.rotation.x += 0.05;
+  moon.rotation.y += 0.075;
+  moon.rotation.z += 0.05;
+
+  camera.position.z = t * -0.01;
+  camera.position.y = t * -0.0002;
+  camera.position.x = t * -0.0002;
+}
+
+document.body.onscroll = moveCamera;
 
 function animate() {
   requestAnimationFrame(animate);
