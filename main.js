@@ -16,7 +16,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 
 // uses dom element
-const renderer = new THREE.WebGL1Renderer({
+const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector("#bg"),
 });
 
@@ -24,6 +24,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 camera.position.setZ(30);
+camera.position.setX(-3);
 
 renderer.render(scene, camera);
 
@@ -104,6 +105,7 @@ function moveCamera() {
 }
 
 document.body.onscroll = moveCamera;
+moveCamera();
 
 function animate() {
   requestAnimationFrame(animate);
