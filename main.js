@@ -1,6 +1,6 @@
 import "./style.css";
 import * as THREE from "three";
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const scene = new THREE.Scene();
 
@@ -35,7 +35,7 @@ const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 // });
 
 // most materials need light
-const material = new THREE.MeshStandardMaterial({color: 0xff6347 })
+const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
 // make mesh combining geometry and material
 const torus = new THREE.Mesh(geometry, material);
 scene.add(torus);
@@ -51,10 +51,25 @@ scene.add(lightHelper, gridHelper);
 // const ambientLight = new THREE.AmbientLight(0xffffff);
 // scene.add(ambientLight);
 
-const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
-scene.add( light );
+const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+scene.add(light);
 
 const controls = new OrbitControls(camera, renderer.domElement);
+
+const stargeometry = new THREE.SphereGeometry(0.25, 24, 24);
+const starmaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+function addStar() {
+  const star = new THREE.Mesh(stargeometry, starmaterial);
+
+  const [x, y, z] = Array(3)
+    .fill()
+    .map(() => THREE.MathUtils.randFloatSpread(100));
+
+  star.position.set(x, y, z);
+  scene.add(star);
+}
+
+Array(150).fill().forEach(addStar);
 
 function animate() {
   requestAnimationFrame(animate);
