@@ -1,6 +1,6 @@
-import "./style.css";
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import './style.css';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 const scene = new THREE.Scene();
 
@@ -8,16 +8,11 @@ const scene = new THREE.Scene();
 // first param is field of view
 // 2nd param is aspect ratio; base off user browser window
 // 3rd 4th param is view frustrum
-const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 // uses dom element
 const renderer = new THREE.WebGLRenderer({
-  canvas: document.querySelector("#bg"),
+  canvas: document.querySelector('#bg'),
 });
 
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -25,6 +20,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 camera.position.setZ(30);
 camera.position.setX(-3);
+// camera.position.setY(30);
 
 renderer.render(scene, camera);
 
@@ -36,26 +32,27 @@ const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 // });
 
 // most materials need light
-const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
+const material = new THREE.MeshStandardMaterial({ color: 0x44aa4b });
 // make mesh combining geometry and material
 const torus = new THREE.Mesh(geometry, material);
+torus.position.setZ(4);
 scene.add(torus);
 
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(15, 10, 5);
-scene.add(pointLight);
+
+const ambientLight = new THREE.AmbientLight(0xffffff);
+scene.add(pointLight, ambientLight);
 
 const lightHelper = new THREE.PointLightHelper(pointLight);
 const gridHelper = new THREE.GridHelper(200, 50);
 scene.add(lightHelper, gridHelper);
 
-// const ambientLight = new THREE.AmbientLight(0xffffff);
-// scene.add(ambientLight);
 
-const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-scene.add(light);
+// const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+// scene.add(light);
 
-const controls = new OrbitControls(camera, renderer.domElement);
+// const controls = new OrbitControls(camera, renderer.domElement);
 
 const stargeometry = new THREE.SphereGeometry(0.25, 24, 24);
 const starmaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
@@ -87,8 +84,8 @@ const moon = new THREE.Mesh(
   })
 )
 // different ways to set
-moon.position.z = 5;
-moon.position.setX(8);
+moon.position.z = 14;
+moon.position.setX(-10);
 
 scene.add(moon);
 
@@ -105,7 +102,7 @@ function moveCamera() {
 }
 
 document.body.onscroll = moveCamera;
-moveCamera();
+// moveCamera();
 
 function animate() {
   requestAnimationFrame(animate);
@@ -114,7 +111,7 @@ function animate() {
   torus.rotation.y += 0.008;
   torus.rotation.z += 0.008;
 
-  controls.update();
+  // controls.update();
 
   renderer.render(scene, camera);
 }
