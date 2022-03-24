@@ -84,7 +84,7 @@ const moon = new THREE.Mesh(
   })
 )
 // different ways to set
-moon.position.z = 14;
+moon.position.z = 18;
 moon.position.setX(-10);
 
 scene.add(moon);
@@ -102,7 +102,7 @@ function moveCamera() {
 }
 
 document.body.onscroll = moveCamera;
-// moveCamera();
+moveCamera();
 
 function animate() {
   requestAnimationFrame(animate);
@@ -110,6 +110,8 @@ function animate() {
   torus.rotation.x += 0.02;
   torus.rotation.y += 0.008;
   torus.rotation.z += 0.008;
+
+  moon.rotation.y += 0.03;
 
   // controls.update();
 
