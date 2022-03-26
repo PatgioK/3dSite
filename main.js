@@ -111,7 +111,7 @@ function animate() {
   torus.rotation.y += 0.008;
   torus.rotation.z += 0.008;
 
-  moon.rotation.y += 0.03;
+  moon.rotation.y += 0.01;
 
   // controls.update();
 
